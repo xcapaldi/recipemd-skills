@@ -1,0 +1,7 @@
+---
+title: metadata
+# Recipe
+
+---
+
+- salt

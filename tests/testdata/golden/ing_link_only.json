@@ -1,0 +1,15 @@
+{
+  "title": "Recipe",
+  "description": null,
+  "yields": [],
+  "tags": [],
+  "ingredients": [
+    {
+      "name": "flour",
+      "amount": null,
+      "link": "./flour.md"
+    }
+  ],
+  "ingredient_groups": [],
+  "instructions": null
+}

@@ -1,0 +1,38 @@
+{
+  "title": "Recipe",
+  "description": null,
+  "yields": [],
+  "tags": [],
+  "ingredients": [],
+  "ingredient_groups": [
+    {
+      "title": "Outer",
+      "ingredients": [],
+      "ingredient_groups": [
+        {
+          "title": "Inner",
+          "ingredients": [
+            {
+              "name": "salt",
+              "amount": null,
+              "link": null
+            }
+          ],
+          "ingredient_groups": []
+        }
+      ]
+    },
+    {
+      "title": "Another",
+      "ingredients": [
+        {
+          "name": "pepper",
+          "amount": null,
+          "link": null
+        }
+      ],
+      "ingredient_groups": []
+    }
+  ],
+  "instructions": null
+}

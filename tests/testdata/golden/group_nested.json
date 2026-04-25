@@ -1,0 +1,45 @@
+{
+  "title": "Recipe",
+  "description": null,
+  "yields": [],
+  "tags": [],
+  "ingredients": [],
+  "ingredient_groups": [
+    {
+      "title": "Group",
+      "ingredients": [
+        {
+          "name": "salt",
+          "amount": null,
+          "link": null
+        }
+      ],
+      "ingredient_groups": [
+        {
+          "title": "Subgroup",
+          "ingredients": [
+            {
+              "name": "pepper",
+              "amount": null,
+              "link": null
+            }
+          ],
+          "ingredient_groups": [
+            {
+              "title": "Sub-subgroup",
+              "ingredients": [
+                {
+                  "name": "cumin",
+                  "amount": null,
+                  "link": null
+                }
+              ],
+              "ingredient_groups": []
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "instructions": null
+}

@@ -1,0 +1,14 @@
+{
+  "title": "Recipe",
+  "description": null,
+  "yields": [
+    {
+      "factor": "4",
+      "unit": null
+    }
+  ],
+  "tags": [],
+  "ingredients": [],
+  "ingredient_groups": [],
+  "instructions": null
+}

@@ -1,0 +1,15 @@
+{
+  "title": "Recipe",
+  "description": null,
+  "yields": [],
+  "tags": [],
+  "ingredients": [],
+  "ingredient_groups": [
+    {
+      "title": "Empty Group",
+      "ingredients": [],
+      "ingredient_groups": []
+    }
+  ],
+  "instructions": null
+}

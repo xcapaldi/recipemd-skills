@@ -1,0 +1,9 @@
+{
+  "title": "Recipe",
+  "description": "Some text.\n\n```\n---\nnot a break\n---\n```\n\nMore text.",
+  "yields": [],
+  "tags": [],
+  "ingredients": [],
+  "ingredient_groups": [],
+  "instructions": null
+}

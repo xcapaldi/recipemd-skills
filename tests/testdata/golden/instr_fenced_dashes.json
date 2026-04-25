@@ -1,0 +1,15 @@
+{
+  "title": "Recipe",
+  "description": null,
+  "yields": [],
+  "tags": [],
+  "ingredients": [
+    {
+      "name": "salt",
+      "amount": null,
+      "link": null
+    }
+  ],
+  "ingredient_groups": [],
+  "instructions": "Instructions here.\n\n```\n---\nnot a break\n---\n```\n\nMore instructions."
+}

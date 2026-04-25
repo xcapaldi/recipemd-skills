@@ -1,0 +1,18 @@
+{
+  "title": "Recipe",
+  "description": null,
+  "yields": [],
+  "tags": [],
+  "ingredients": [
+    {
+      "name": "egg",
+      "amount": {
+        "factor": "1",
+        "unit": null
+      },
+      "link": null
+    }
+  ],
+  "ingredient_groups": [],
+  "instructions": null
+}

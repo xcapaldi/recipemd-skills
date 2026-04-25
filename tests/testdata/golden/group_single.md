@@ -1,0 +1,7 @@
+# Recipe
+
+---
+
+## Group
+
+- salt

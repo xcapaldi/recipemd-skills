@@ -1,0 +1,32 @@
+{
+  "title": "Recipe",
+  "description": null,
+  "yields": [],
+  "tags": [],
+  "ingredients": [],
+  "ingredient_groups": [
+    {
+      "title": "First",
+      "ingredients": [
+        {
+          "name": "salt",
+          "amount": null,
+          "link": null
+        }
+      ],
+      "ingredient_groups": []
+    },
+    {
+      "title": "Second",
+      "ingredients": [
+        {
+          "name": "pepper",
+          "amount": null,
+          "link": null
+        }
+      ],
+      "ingredient_groups": []
+    }
+  ],
+  "instructions": null
+}

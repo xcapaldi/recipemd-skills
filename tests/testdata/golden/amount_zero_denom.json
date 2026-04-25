@@ -1,0 +1,18 @@
+{
+  "title": "Recipe",
+  "description": null,
+  "yields": [],
+  "tags": [],
+  "ingredients": [
+    {
+      "name": "stuff",
+      "amount": {
+        "factor": "5",
+        "unit": "/0"
+      },
+      "link": null
+    }
+  ],
+  "ingredient_groups": [],
+  "instructions": null
+}

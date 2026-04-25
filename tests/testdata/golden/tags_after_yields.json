@@ -1,0 +1,16 @@
+{
+  "title": "Recipe",
+  "description": null,
+  "yields": [
+    {
+      "factor": "4",
+      "unit": "servings"
+    }
+  ],
+  "tags": [
+    "vegetarian"
+  ],
+  "ingredients": [],
+  "ingredient_groups": [],
+  "instructions": null
+}

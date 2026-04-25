@@ -1,0 +1,36 @@
+{
+  "title": "Recipe",
+  "description": null,
+  "yields": [],
+  "tags": [],
+  "ingredients": [],
+  "ingredient_groups": [
+    {
+      "title": "Group",
+      "ingredients": [
+        {
+          "name": "salt",
+          "amount": null,
+          "link": null
+        },
+        {
+          "name": "pepper",
+          "amount": null,
+          "link": null
+        },
+        {
+          "name": "garlic",
+          "amount": null,
+          "link": null
+        },
+        {
+          "name": "onion",
+          "amount": null,
+          "link": null
+        }
+      ],
+      "ingredient_groups": []
+    }
+  ],
+  "instructions": null
+}

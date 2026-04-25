@@ -1,0 +1,26 @@
+{
+  "title": "Recipe",
+  "description": null,
+  "yields": [],
+  "tags": [],
+  "ingredients": [
+    {
+      "name": "flour",
+      "amount": {
+        "factor": "1",
+        "unit": "cup"
+      },
+      "link": null
+    },
+    {
+      "name": "sugar",
+      "amount": {
+        "factor": "2",
+        "unit": "cups"
+      },
+      "link": null
+    }
+  ],
+  "ingredient_groups": [],
+  "instructions": null
+}

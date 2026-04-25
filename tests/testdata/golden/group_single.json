@@ -1,0 +1,21 @@
+{
+  "title": "Recipe",
+  "description": null,
+  "yields": [],
+  "tags": [],
+  "ingredients": [],
+  "ingredient_groups": [
+    {
+      "title": "Group",
+      "ingredients": [
+        {
+          "name": "salt",
+          "amount": null,
+          "link": null
+        }
+      ],
+      "ingredient_groups": []
+    }
+  ],
+  "instructions": null
+}
