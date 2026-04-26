@@ -26,6 +26,9 @@ class Amount:
     def to_dict(self) -> dict:
         return {"factor": _format_factor(self.factor), "unit": self.unit}
 
+    def scale(self, factor: float) -> None:
+        self.factor *= factor
+
 
 @dataclass
 class Ingredient:
@@ -40,6 +43,10 @@ class Ingredient:
             "link": self.link,
         }
 
+    def scale(self, factor: float) -> None:
+        if self.amount is not None:
+            self.amount.scale(factor)
+
 
 @dataclass
 class IngredientGroup:
@@ -53,6 +60,12 @@ class IngredientGroup:
             "ingredients": [i.to_dict() for i in self.ingredients],
             "ingredient_groups": [g.to_dict() for g in self.ingredient_groups],
         }
+
+    def scale(self, factor: float) -> None:
+        for ing in self.ingredients:
+            ing.scale(factor)
+        for sub in self.ingredient_groups:
+            sub.scale(factor)
 
 
 @dataclass
@@ -75,6 +88,27 @@ class Recipe:
             "ingredient_groups": [g.to_dict() for g in self.ingredient_groups],
             "instructions": self.instructions,
         }
+
+    def scale(self, factor: float) -> None:
+        for y in self.yields:
+            y.scale(factor)
+        for ing in self.ingredients:
+            ing.scale(factor)
+        for g in self.ingredient_groups:
+            g.scale(factor)
+
+    def scale_for_yield(self, desired: Amount) -> None:
+        for y in self.yields:
+            if y.unit is None and desired.unit is None:
+                self.scale(desired.factor / y.factor)
+                return
+            if y.unit is not None and desired.unit == y.unit:
+                self.scale(desired.factor / y.factor)
+                return
+        if desired.unit is None:
+            self.scale(desired.factor)
+            return
+        raise RecipeMDError(f"no matching yield unit: {desired.unit!r}")
 
 
 def _format_factor(f: float, rounding: int = 3) -> str:
@@ -188,7 +222,7 @@ _AMOUNT_PARSERS = (
 )
 
 
-def _parse_amount(s: str) -> Amount:
+def parse_amount(s: str) -> Amount:
     s = s.lstrip()
     negative = False
     if s.startswith("-"):
@@ -238,7 +272,7 @@ def _parse_tags(s: str) -> list[str]:
 
 
 def _parse_yields(s: str) -> list[Amount]:
-    return [_parse_amount(item) for item in _split_list(s)]
+    return [parse_amount(item) for item in _split_list(s)]
 
 
 def _is_only_emphasis(inline: Token, kind: str) -> tuple[str, bool]:
@@ -356,7 +390,7 @@ def _extract_amount(inline: Token) -> tuple[Amount | None, list[Token]]:
         c.content for c in children[1:close_at]
         if c.type in ("text", "code_inline")
     ).strip()
-    return _parse_amount(inner_text), children[close_at + 1 :]
+    return parse_amount(inner_text), children[close_at + 1 :]
 
 
 def _find_single_link(children: list[Token]) -> tuple[str, str] | None:
@@ -648,6 +682,11 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument(
         "--frontmatter", action="store_true", help="strip YAML/TOML frontmatter"
     )
+    p.add_argument(
+        "--scale",
+        metavar="AMOUNT",
+        help='scale by a factor ("2", "0.5") or to a target yield ("6 servings")',
+    )
     p.add_argument("--indent", type=int, default=2, help="JSON indent (default: 2)")
     args = p.parse_args(argv)
 
@@ -662,6 +701,24 @@ def main(argv: list[str] | None = None) -> int:
     except RecipeMDError as e:
         print(f"error: {e}", file=sys.stderr)
         return 1
+
+    if args.scale is not None:
+        try:
+            scale_amount = parse_amount(args.scale)
+        except RecipeMDError as e:
+            print(f"error: invalid --scale value: {e}", file=sys.stderr)
+            return 1
+        if scale_amount.factor == 0:
+            print("error: --scale value must be non-zero", file=sys.stderr)
+            return 1
+        try:
+            if scale_amount.unit is None:
+                recipe.scale(scale_amount.factor)
+            else:
+                recipe.scale_for_yield(scale_amount)
+        except RecipeMDError as e:
+            print(f"error: {e}", file=sys.stderr)
+            return 1
 
     print(json.dumps(recipe.to_dict(), indent=args.indent, ensure_ascii=False))
     return 0
