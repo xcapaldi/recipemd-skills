@@ -1,13 +1,3 @@
----
-name: recipemd-extract
-description: Extract a recipe from a URL or page content and write it in RecipeMD format
-license: MIT
-allowed-tools: Bash, WebFetch, Read, Write
-metadata:
-    author: Xavier Capaldi
-    version: 0.2.0
----
-
 # Extract Recipe
 
 Extract a recipe from a URL and convert it to [RecipeMD](https://recipemd.org) format.

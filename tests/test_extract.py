@@ -8,7 +8,7 @@ EXTRACT_DIR = (
     / "plugins"
     / "recipemd"
     / "skills"
-    / "recipemd-extract"
+    / "recipemd"
     / "scripts"
 )
 sys.path.insert(0, str(EXTRACT_DIR))
