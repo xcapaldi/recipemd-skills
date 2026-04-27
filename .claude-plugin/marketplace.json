@@ -9,9 +9,9 @@
   },
   "plugins": [
     {
-      "name": "recipemd-plugin",
-      "source": "./plugins/recipemd-plugin",
-      "description": "Adds skills to aid in scraping, reading and writing recipes in the RecipeMD format.",
+      "name": "recipemd",
+      "source": "./plugins/recipemd",
+      "description": "Read, write, scale, extract, and plan with recipes in the RecipeMD format.",
       "strict": true
     }
   ]

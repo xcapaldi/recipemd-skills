@@ -1,5 +1,5 @@
 {
-  "name": "recipemd-plugin",
+  "name": "recipemd",
   "description": "Read, write, scale, extract, and plan with recipes in the RecipeMD format.",
   "author": {
     "name": "Xavier Capaldi"
