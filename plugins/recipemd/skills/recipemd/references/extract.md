@@ -20,7 +20,7 @@ Default is **normal** unless the user explicitly requests cleanroom.
 This skill has two extraction paths. Choose based on tool availability:
 
 - **Scripted path (Step 2A)** — preferred. Requires Bash and one of `uv`, `pipx`, or a Python with `recipe-scrapers` installed.
-- **Manual path (Step 2B)** — fallback. Used when Bash isn't available (e.g., Claude.ai chat) or no Python runner is on PATH.
+- **Manual path (Step 2B)** — fallback. Used when Bash isn't available (e.g., Claude Chat or Cowork) or no Python runner is on PATH.
 
 Probe by attempting to run a runner — for example:
 
