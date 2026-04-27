@@ -1,0 +1,55 @@
+name: Release plugin skill bundles
+
+on:
+  push:
+    tags:
+      - "*/v*"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Parse tag
+        id: tag
+        run: |
+          plugin="${GITHUB_REF_NAME%/v*}"
+          version="${GITHUB_REF_NAME#*/v}"
+          echo "plugin=$plugin" >> "$GITHUB_OUTPUT"
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+
+      - name: Validate version consistency
+        run: |
+          plugin="${{ steps.tag.outputs.plugin }}"
+          version="${{ steps.tag.outputs.version }}"
+          plugin_dir="plugins/$plugin"
+          if [ ! -d "$plugin_dir" ]; then
+            echo "ERROR: plugin directory $plugin_dir does not exist"
+            exit 1
+          fi
+          errors=0
+          check() { if [ "$1" != "$version" ]; then echo "ERROR: $2 has version $1, expected $version"; errors=$((errors+1)); fi; }
+          check "$(jq -r '.version' "$plugin_dir/.claude-plugin/plugin.json")" "plugin.json"
+          for skill in "$plugin_dir"/skills/*/SKILL.md; do
+            skill_version=$(sed -n '/^---$/,/^---$/{ /version:/s/.*version: *//p }' "$skill")
+            check "$skill_version" "$skill"
+          done
+          exit $errors
+
+      - name: Build .skill bundles
+        run: |
+          plugin="${{ steps.tag.outputs.plugin }}"
+          skills_dir="plugins/$plugin/skills"
+          for skill in "$skills_dir"/*/; do
+            name=$(basename "$skill")
+            (cd "$skills_dir" && zip -r "$OLDPWD/$name.skill" "$name")
+          done
+
+      - name: Create release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create "$GITHUB_REF_NAME" *.skill --generate-notes
