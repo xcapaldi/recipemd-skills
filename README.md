@@ -71,10 +71,8 @@ Amounts are wrapped in emphasis: `*2 tbsp*`. Numbers can be integers (`3`), deci
 The [vercel-labs/skills](https://github.com/vercel-labs/skills) CLI installs skills from any Git repo. These skills have only been tested with Anthropic models.
 
 ```
-npx skills@latest add xcapaldi/recipemd-skills
+npx skills@latest add xcapaldi/recipemd-skills/recipemd
 ```
-
-The CLI discovers the skill automatically via the `.claude-plugin/marketplace.json` manifest in the repo root.
 
 ## Install in Claude Code
 
