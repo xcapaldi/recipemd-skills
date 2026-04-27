@@ -5,7 +5,7 @@ license: MIT
 allowed-tools: Bash, Read, Write, WebFetch
 metadata:
     author: Xavier Capaldi
-    version: 0.3.0
+    version: 0.1.0
 ---
 
 # RecipeMD
@@ -20,6 +20,7 @@ Tools for working with [RecipeMD](https://recipemd.org) — a Markdown-based rec
 | **Scale** a recipe by a factor or to a target yield | `scripts/recipemd.py --scale <amount> <file>` |
 | **Extract** a recipe from a URL or page content | read `references/extract.md` and follow that workflow |
 | **Plan** weekly meals as a recipe-of-recipes | read `references/meal-plan.md` and follow that workflow |
+| **Shopping list** — consolidate ingredients from a recipe (or meal plan), resolve linked sub-recipes, dedup, group by store section | read `references/shopping-list.md` and follow that workflow |
 
 Pick the row that matches the user's request. For parse/scale, run the script directly. For extract/meal-plan, read the corresponding reference file first — it contains the step-by-step workflow.
 
@@ -52,3 +53,11 @@ python scripts/recipemd.py --scale "6 servings" <file> # ratio-scale to target y
 
 - **Single source of truth for quantities is the structured ingredient list.** When generating or rewriting recipe body text (description, instructions), avoid absolute quantity references that duplicate the ingredient list — they break under scaling. See `references/extract.md` § "Inline quantities in body text" for the rewrite rules.
 - **`scripts/recipemd.py` is the validator.** Any RecipeMD output you produce should round-trip through it before you report success.
+
+## Examples
+
+`examples/` holds reference outputs you can use as targets:
+
+- `examples/recipe.md` — a thorough single recipe (preamble + tags + multi-yield + ingredient groups + linked sub-recipe + multi-paragraph instructions).
+- `examples/meal-plan.md` — a week's meal plan as a recipe-of-recipes.
+- `examples/shopping-list.md` — the consolidated grocery list derived from that meal plan.

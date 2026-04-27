@@ -136,3 +136,7 @@ Expected outcomes:
 - **Exit 1 + `error: ...` on stderr** → invalid. Read the error, identify the structural problem in the document, fix it, re-run validation. Repeat until exit 0.
 
 If running scripts isn't possible (manual path with no Bash), tell the user that automatic validation could not run and recommend they re-run this skill in a Claude Code session, or paste the document into a session where the parser is available.
+
+## Reference example
+
+`examples/recipe.md` shows what a thorough RecipeMD document looks like when produced by this workflow: full preamble (description, tags, multi-yield), two ingredient groups, a linked sub-recipe ingredient (`[Fresh egg pasta](./fresh-egg-pasta.md)`), and multi-paragraph instructions. Use it as a target shape when in doubt about formatting choices.
