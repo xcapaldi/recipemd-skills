@@ -68,25 +68,13 @@ Amounts are wrapped in emphasis: `*2 tbsp*`. Numbers can be integers (`3`), deci
 
 ## Install via skills CLI
 
-The [vercel-labs/skills](https://github.com/vercel-labs/skills) CLI installs skills from any Git repo into your agent's skills directory. Skills have only been tested with Anthropic models.
+The [vercel-labs/skills](https://github.com/vercel-labs/skills) CLI installs skills from any Git repo. These skills have only been tested with Anthropic models.
 
-Point directly at the skill directory (the `SKILL.md` lives under `plugins/recipemd/skills/recipemd/`, not at the repo root):
-
-```bash
-npx skills add https://github.com/xcapaldi/recipemd-skills/tree/main/plugins/recipemd/skills/recipemd
+```
+npx skills@latest add xcapaldi/recipemd-skills
 ```
 
-To target Claude Code specifically:
-
-```bash
-npx skills add https://github.com/xcapaldi/recipemd-skills/tree/main/plugins/recipemd/skills/recipemd -a claude-code
-```
-
-Use `-g` to install globally (accessible across all projects) instead of the default project scope:
-
-```bash
-npx skills add https://github.com/xcapaldi/recipemd-skills/tree/main/plugins/recipemd/skills/recipemd -g
-```
+The CLI discovers the skill automatically via the `.claude-plugin/marketplace.json` manifest in the repo root.
 
 ## Install in Claude Code
 
