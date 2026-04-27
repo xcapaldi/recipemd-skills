@@ -66,7 +66,23 @@ Three sections divided by `---` thematic breaks:
 
 Amounts are wrapped in emphasis: `*2 tbsp*`. Numbers can be integers (`3`), decimals (`1.5`), fractions (`1/2`), improper fractions (`1 1/2`), or Unicode vulgar fractions (`½ ¼ ¾`).
 
-## Install in Claude Code
+## Installation (via [Vercel's skills](https://vercel.com/docs/agent-resources/skills))
+
+```sh
+npx skills@latest add xcapaldi/recipemd-skills
+```
+
+or 
+
+
+```sh
+pnpm dlx skills@latest add xcapaldi/recipemd-skills
+```
+
+> [!NOTE]  
+> Only tested in the Anthropic suite of products so far.
+
+### Install in Claude Code
 
 Claude Code has a plugin system that pulls skills directly from a Git repo or marketplace. Full docs: <https://code.claude.com/docs/en/discover-plugins>.
 
@@ -79,7 +95,7 @@ Add this repo as a marketplace, then install the plugin:
 
 Once installed, ask anything RecipeMD-related ("parse this file", "extract a recipe from this URL", "plan vegetarian dinners for next week", "make a shopping list from `meal-plan.md`") and the skill will trigger.
 
-## Install manually for Claude Chat or Cowork
+### Install manually for Claude Chat or Cowork
 
 Both Claude Chat and Cowork accept `.skill` bundles uploaded through their skills UI.
 
@@ -101,7 +117,7 @@ The skill works in all three environments, but what it can *do* depends on which
 |---|---|---|---|
 | Parse / validate | ✅ runs `recipemd.py` | ✅ runs `recipemd.py` | ✅ runs `recipemd.py` |
 | Scale | ✅ runs `recipemd.py --scale` | ✅ runs `recipemd.py --scale` | ✅ runs `recipemd.py --scale` |
-| Extract from URL | ✅ runs `extract.py` (via uv/pipx) | WebFetch, or page access via Chrome extension | ✅ WebFetch |
+| Extract from URL | ✅ runs `extract.py` (via uv/pipx) | ✅ WebFetch, or page access via Chrome extension | ✅ WebFetch |
 | Read recipe files from disk | ✅ filesystem | ✅ when you grant the recipe directory | ❌ user pastes content inline |
 | Build meal plans | ✅ scans collection | ✅ scans granted directory | ❌ user pastes recipe titles |
 | Generate shopping list | ✅ resolves linked recipes recursively | ✅ resolves links in granted directory | ❌ links can't be resolved |
