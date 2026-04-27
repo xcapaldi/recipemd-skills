@@ -7,9 +7,10 @@ import json
 import re
 import sys
 from dataclasses import dataclass, field
+from typing import TYPE_CHECKING
 
-from markdown_it import MarkdownIt
-from markdown_it.token import Token
+if TYPE_CHECKING:
+    from markdown_it.token import Token
 
 __version__ = "0.1.0"
 
@@ -583,6 +584,9 @@ def _parse_ingredient_groups(
 
 
 def parse(text: str, *, frontmatter: bool = False) -> Recipe:
+    # Lazy so dataclasses + parse_amount stay usable without markdown-it-py installed.
+    from markdown_it import MarkdownIt
+
     if frontmatter:
         text = _strip_frontmatter(text)
 
