@@ -2,7 +2,6 @@
 name: recipemd
 description: Read, write, scale, extract, and plan with RecipeMD recipes — a Markdown-based recipe format
 license: MIT
-allowed-tools: Bash, Read, Write, WebFetch
 metadata:
     author: Xavier Capaldi
     version: 0.1.0
