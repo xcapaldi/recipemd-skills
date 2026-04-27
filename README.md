@@ -66,6 +66,26 @@ Three sections divided by `---` thematic breaks:
 
 Amounts are wrapped in emphasis: `*2 tbsp*`. Numbers can be integers (`3`), decimals (`1.5`), fractions (`1/2`), improper fractions (`1 1/2`), or Unicode vulgar fractions (`½ ¼ ¾`).
 
+## Install via skills CLI
+
+The [vercel-labs/skills](https://github.com/vercel-labs/skills) CLI installs skills from any Git repo into your agent's skills directory. Skills have only been tested with Anthropic models.
+
+```bash
+npx skills add xcapaldi/recipemd-skills
+```
+
+To target Claude Code specifically:
+
+```bash
+npx skills add xcapaldi/recipemd-skills -a claude-code
+```
+
+Use `-g` to install globally (accessible across all projects) instead of the default project scope:
+
+```bash
+npx skills add xcapaldi/recipemd-skills -g
+```
+
 ## Install in Claude Code
 
 Claude Code has a plugin system that pulls skills directly from a Git repo or marketplace. Full docs: <https://code.claude.com/docs/en/discover-plugins>.
