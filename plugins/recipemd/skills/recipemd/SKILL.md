@@ -4,7 +4,7 @@ description: Read, write, scale, extract, and plan with RecipeMD recipes — a M
 license: MIT
 metadata:
     author: Xavier Capaldi
-    version: 0.1.0
+    version: 0.1.1
 ---
 
 # RecipeMD

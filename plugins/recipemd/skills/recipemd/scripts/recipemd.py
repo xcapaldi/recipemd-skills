@@ -19,7 +19,7 @@ from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from markdown_it.token import Token
 
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 
 
 class RecipeMDError(ValueError):
