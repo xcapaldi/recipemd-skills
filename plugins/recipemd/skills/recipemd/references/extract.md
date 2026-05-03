@@ -125,10 +125,10 @@ Write the RecipeMD content to that file in the current working directory unless 
 Run the bundled RecipeMD parser to confirm the output is structurally valid:
 
 ```bash
-python scripts/recipemd.py <output_file>
+uv run scripts/recipemd.py <output_file>
 ```
 
-(Prefer `uv run python scripts/recipemd.py <output_file>` if `uv` is available — it ensures `markdown-it-py` is on the path.)
+(`uv run` auto-installs `markdown-it-py` via the script's PEP 723 metadata. Fall back to `python scripts/recipemd.py <output_file>` if `uv` is unavailable and `markdown-it-py` is already on PATH.)
 
 Expected outcomes:
 

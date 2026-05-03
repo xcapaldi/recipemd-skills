@@ -26,8 +26,8 @@ Pick the row that matches the user's request. For parse/scale, run the script di
 ## Parse / validate
 
 ```bash
-python scripts/recipemd.py <file>             # plain Python
-uv run python scripts/recipemd.py <file>      # with dependency lock
+uv run scripts/recipemd.py <file>             # auto-installs markdown-it-py via PEP 723
+python scripts/recipemd.py <file>             # if markdown-it-py is already on PATH
 ```
 
 - Exit 0 + JSON on stdout → valid. Print or use the parsed structure.
@@ -41,9 +41,9 @@ Useful flags:
 ## Scale
 
 ```bash
-python scripts/recipemd.py --scale 2 <file>            # double everything
-python scripts/recipemd.py --scale 0.5 <file>          # halve everything
-python scripts/recipemd.py --scale "6 servings" <file> # ratio-scale to target yield
+uv run scripts/recipemd.py --scale 2 <file>            # double everything
+uv run scripts/recipemd.py --scale 0.5 <file>          # halve everything
+uv run scripts/recipemd.py --scale "6 servings" <file> # ratio-scale to target yield
 ```
 
 `--scale FACTOR` (bare number) multiplies all yields and ingredient amounts. `--scale "N unit"` finds a yield with matching unit and applies the corresponding ratio. Unmatched unit → error. Zero factor → error.

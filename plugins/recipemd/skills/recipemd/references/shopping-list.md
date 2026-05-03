@@ -24,7 +24,7 @@ Filename: `shopping-list-YYYY-MM-DD.md` unless the user specifies otherwise.
 ## Step 1: Parse the base recipe
 
 ```bash
-python scripts/recipemd.py <input_file>
+uv run scripts/recipemd.py <input_file>
 ```
 
 Use the JSON output as the structured starting point. Capture the flat `ingredients` and recurse into `ingredient_groups` to gather every ingredient at every depth into a working list. Each entry carries `name`, `amount` (optional), `link` (optional).
@@ -46,7 +46,7 @@ For each linked entry:
    - `*6 servings* [pasta](./pasta.md)` → ratio-scale `pasta.md` to 6 servings (use `--scale "6 servings"`).
    - `[pasta](./pasta.md)` (no amount) → load at 1× as written.
    ```bash
-   python scripts/recipemd.py --scale "<amount>" <sub_recipe_file>
+   uv run scripts/recipemd.py --scale "<amount>" <sub_recipe_file>
    ```
 3. **Recurse.** The sub-recipe may itself contain linked recipes (e.g. a curry recipe linking to `./homemade-curry-paste.md`). Apply the same resolve-and-scale step on its ingredients before merging.
 4. **Replace the linked entry** in the working list with the *expanded* ingredients of the scaled sub-recipe. Drop the original link entry — it's now represented by its components.
@@ -121,7 +121,7 @@ Notes:
 ## Step 6: Validate
 
 ```bash
-python scripts/recipemd.py shopping-list-YYYY-MM-DD.md
+uv run scripts/recipemd.py shopping-list-YYYY-MM-DD.md
 ```
 
 Round-trip through the parser. Fix any errors and retry until exit 0. Then report success to the user with the file path.

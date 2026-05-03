@@ -163,7 +163,7 @@ Filename default: `meal-plan-YYYY-MM-DD.md` (using the start date of the scope, 
 ## Step 6: Validate
 
 ```bash
-python scripts/recipemd.py <plan_file>
+uv run scripts/recipemd.py <plan_file>
 ```
 
 Round-trip through the parser. Fix any structural errors and retry until exit 0.
