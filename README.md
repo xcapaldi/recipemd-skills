@@ -2,6 +2,7 @@
 
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit)](https://github.com/pre-commit/pre-commit)
 [![Agent Skills](https://img.shields.io/badge/agent--skills-compliant-blue)](https://agentskills.io/home)
+[![skills.sh](https://skills.sh/b/xcapaldi/recipemd-skills)](https://skills.sh/xcapaldi/recipemd-skills)
 
 A Claude plugin for working with recipes in the [RecipeMD](https://recipemd.org) format. Parse, scale, extract from URLs, plan meals, and consolidate shopping lists — all from one skill that works across Claude Code, Claude Cowork, and Claude Chat (with environment-dependent capabilities).
 
