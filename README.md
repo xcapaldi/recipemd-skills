@@ -23,12 +23,14 @@ This README is itself a valid RecipeMD document — drop it into the parser and 
 - extract from URL or HTML — see `references/extract.md`
 - plan weekly meals as a recipe-of-recipes — see `references/meal-plan.md`
 - shopping list from a recipe or meal plan — see `references/shopping-list.md`
+- export to Open Knowledge Format (optional) — see `references/okf.md`
 
 ## Examples
 
 - `examples/recipe.md` — thorough single recipe
 - `examples/meal-plan.md` — week of meals as a recipe-of-recipes
 - `examples/shopping-list.md` — consolidated grocery list
+- `examples/okf/` — Open Knowledge Format bundle exported from `examples/recipe.md`
 
 ---
 
@@ -122,6 +124,7 @@ The skill works in all three environments, but what it can *do* depends on which
 | Read recipe files from disk | ✅ filesystem | ✅ when you grant the recipe directory | ❌ user pastes content inline |
 | Build meal plans | ✅ scans collection | ✅ scans granted directory | ❌ user pastes recipe titles |
 | Generate shopping list | ✅ resolves linked recipes recursively | ✅ resolves links in granted directory | ❌ links can't be resolved |
+| Export to OKF (optional) | ✅ runs `okf.py`, incl. `--bundle` over a directory | ✅ runs `okf.py` in its Python environment | ✅ runs `okf.py` for single-file mode |
 
 In short:
 

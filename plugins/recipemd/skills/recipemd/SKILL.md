@@ -1,6 +1,6 @@
 ---
 name: recipemd
-description: Read, write, scale, extract, and plan with RecipeMD recipes — a Markdown-based recipe format
+description: Read, write, scale, extract, and plan with RecipeMD recipes — a Markdown-based recipe format. Optionally exports recipes to the Open Knowledge Format (OKF).
 license: MIT
 metadata:
     author: Xavier Capaldi
@@ -20,8 +20,9 @@ Tools for working with [RecipeMD](https://recipemd.org) — a Markdown-based rec
 | **Extract** a recipe from a URL or page content | read `references/extract.md` and follow that workflow |
 | **Plan** weekly meals as a recipe-of-recipes | read `references/meal-plan.md` and follow that workflow |
 | **Shopping list** — consolidate ingredients from a recipe (or meal plan), resolve linked sub-recipes, dedup, group by store section | read `references/shopping-list.md` and follow that workflow |
+| **Export to OKF** (optional) — convert a recipe or recipe collection to an [Open Knowledge Format](https://cloud.google.com/blog/products/data-analytics/how-the-open-knowledge-format-can-improve-data-sharing/) bundle | read `references/okf.md` and follow that workflow |
 
-Pick the row that matches the user's request. For parse/scale, run the script directly. For extract/meal-plan, read the corresponding reference file first — it contains the step-by-step workflow.
+Pick the row that matches the user's request. For parse/scale, run the script directly. For extract/meal-plan/okf, read the corresponding reference file first — it contains the step-by-step workflow.
 
 ## Parse / validate
 
@@ -48,6 +49,15 @@ uv run scripts/recipemd.py --scale "6 servings" <file> # ratio-scale to target y
 
 `--scale FACTOR` (bare number) multiplies all yields and ingredient amounts. `--scale "N unit"` finds a yield with matching unit and applies the corresponding ratio. Unmatched unit → error. Zero factor → error.
 
+## Export to OKF (optional)
+
+```bash
+uv run scripts/okf.py <file>                                   # single recipe -> stdout
+uv run scripts/okf.py --bundle <recipes_dir> --out <out_dir>    # collection -> OKF bundle
+```
+
+One-way, export-only conversion to the [Open Knowledge Format](https://cloud.google.com/blog/products/data-analytics/how-the-open-knowledge-format-can-improve-data-sharing/). RecipeMD remains the source of truth — only use this when the user explicitly asks to share or expose recipes in OKF. See `references/okf.md` for the field mapping and workflow.
+
 ## Conventions
 
 - **Single source of truth for quantities is the structured ingredient list.** When generating or rewriting recipe body text (description, instructions), avoid absolute quantity references that duplicate the ingredient list — they break under scaling. See `references/extract.md` § "Inline quantities in body text" for the rewrite rules.
@@ -60,3 +70,4 @@ uv run scripts/recipemd.py --scale "6 servings" <file> # ratio-scale to target y
 - `examples/recipe.md` — a thorough single recipe (preamble + tags + multi-yield + ingredient groups + linked sub-recipe + multi-paragraph instructions).
 - `examples/meal-plan.md` — a week's meal plan as a recipe-of-recipes.
 - `examples/shopping-list.md` — the consolidated grocery list derived from that meal plan.
+- `examples/okf/` — the OKF bundle produced from `examples/recipe.md`.
