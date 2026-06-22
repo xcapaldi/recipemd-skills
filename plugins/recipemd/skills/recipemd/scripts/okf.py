@@ -7,11 +7,13 @@
 # ///
 """Convert RecipeMD documents to Open Knowledge Format (OKF) documents/bundles.
 
-OKF (https://cloud.google.com/blog/products/data-analytics/how-the-open-knowledge-format-can-improve-data-sharing/)
-represents knowledge as plain markdown files with a YAML frontmatter block
-(only `type` is mandatory) followed by a free-form markdown body. Bundles are
-directories of such files linked together with normal markdown links, with an
-optional `index.md` per directory.
+OKF (https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md)
+represents concepts as markdown files with a YAML frontmatter block (only
+`type` is required; `title`/`description`/`resource`/`tags`/`timestamp` are
+recommended) followed by a free-form markdown body. Bundles are directories
+of such files linked together with normal markdown links. `index.md` is a
+reserved filename for a directory listing — per spec it carries no
+frontmatter, just heading-grouped bullet links.
 
 Two modes:
 
@@ -22,6 +24,7 @@ Two modes:
 from __future__ import annotations
 
 import argparse
+import re
 import sys
 from pathlib import Path
 
@@ -38,7 +41,8 @@ from recipemd import (  # noqa: E402
 )
 
 OKF_RECIPE_TYPE = "Recipe"
-OKF_COLLECTION_TYPE = "Recipe Collection"
+
+_SENTENCE_END = re.compile(r"[.!?](?=\s|$)")
 
 
 def _yaml_str(s: str) -> str:
@@ -63,6 +67,21 @@ def _yaml_frontmatter(fields: dict[str, str | list[str]]) -> str:
             lines.append(f"{key}: {_yaml_str(value)}")
     lines.append("---")
     return "\n".join(lines)
+
+
+def _short_description(text: str | None) -> str | None:
+    """First sentence of the first paragraph, collapsed to one line.
+
+    OKF's `description` field is meant to be "a single sentence summarizing
+    the concept" — RecipeMD descriptions are often multi-paragraph, so the
+    rest goes in the body instead (see ``recipe_to_body``).
+    """
+    if not text:
+        return None
+    first_para = text.strip().split("\n\n", 1)[0]
+    first_line = " ".join(first_para.split())
+    m = _SENTENCE_END.search(first_line)
+    return first_line[: m.end()] if m else first_line
 
 
 def _amount_str(amount: Amount) -> str:
@@ -96,8 +115,9 @@ def recipe_to_frontmatter(
         "type": OKF_RECIPE_TYPE,
         "title": recipe.title,
     }
-    if recipe.description:
-        fields["description"] = recipe.description
+    short_desc = _short_description(recipe.description)
+    if short_desc:
+        fields["description"] = short_desc
     if recipe.tags:
         fields["tags"] = list(recipe.tags)
     if recipe.yields:
@@ -108,13 +128,23 @@ def recipe_to_frontmatter(
 
 
 def recipe_to_body(recipe: Recipe) -> str:
-    lines = ["## Ingredients", ""]
+    lines: list[str] = []
+    short_desc = _short_description(recipe.description)
+    if recipe.description and recipe.description.strip() != short_desc:
+        lines.append("# Notes")
+        lines.append("")
+        lines.append(recipe.description.strip())
+        lines.append("")
+
+    lines.append("# Ingredients")
+    lines.append("")
     lines.extend(_render_ingredient(i) for i in recipe.ingredients)
     if recipe.ingredients:
         lines.append("")
-    lines.extend(_render_groups(recipe.ingredient_groups, depth=3))
+    lines.extend(_render_groups(recipe.ingredient_groups, depth=2))
+
     if recipe.instructions:
-        lines.append("## Instructions")
+        lines.append("# Instructions")
         lines.append("")
         lines.append(recipe.instructions)
         lines.append("")
@@ -146,7 +176,7 @@ def build_bundle(
     recipes_dir = out_dir / "recipes"
     recipes_dir.mkdir(parents=True, exist_ok=True)
 
-    links: list[str] = []
+    entries: list[str] = []
     for file in files:
         text = file.read_text(encoding="utf-8")
         try:
@@ -155,17 +185,17 @@ def build_bundle(
             raise RecipeMDError(f"{file}: {e}") from e
         doc = recipe_to_okf_doc(recipe)
         (recipes_dir / file.name).write_text(doc, encoding="utf-8")
-        links.append(f"- [{recipe.title}](./recipes/{file.name})")
+        short_desc = _short_description(recipe.description)
+        suffix = f" - {short_desc}" if short_desc else ""
+        entries.append(f"* [{recipe.title}](./recipes/{file.name}){suffix}")
 
-    index_fields: dict[str, str | list[str]] = {
-        "type": OKF_COLLECTION_TYPE,
-        "title": title or _default_collection_title(input_dir),
-    }
+    # index.md is a reserved OKF filename: a directory listing with no
+    # frontmatter, just heading-grouped bullet links (SPEC.md section 6).
+    lines = [f"# {title or _default_collection_title(input_dir)}", ""]
     if description:
-        index_fields["description"] = description
-    index_body = "## Recipes\n\n" + "\n".join(links) + "\n"
-    index_doc = f"{_yaml_frontmatter(index_fields)}\n\n{index_body}"
-    (out_dir / "index.md").write_text(index_doc, encoding="utf-8")
+        lines.extend([description, ""])
+    lines.extend(["# Recipes", "", *entries, ""])
+    (out_dir / "index.md").write_text("\n".join(lines), encoding="utf-8")
 
 
 def main(argv: list[str] | None = None) -> int:

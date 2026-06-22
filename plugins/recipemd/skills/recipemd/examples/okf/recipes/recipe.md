@@ -1,14 +1,23 @@
 ---
 type: "Recipe"
 title: "Spaghetti Bolognese"
-description: "A slow-simmered Italian-American meat sauce served over fresh pasta. Best made\nahead — the flavor deepens overnight. Freezes well for up to three months.\n\nThe sauce is a riff on the classic Bolognese ragù: soffritto, browned beef,\nwine reduction, and a long, gentle simmer. The milk near the end is the\ntraditional touch — it tenderizes the meat and rounds out the acid."
+description: "A slow-simmered Italian-American meat sauce served over fresh pasta."
 tags: ["italian", "pasta", "weekend", "makes-leftovers"]
 yields: ["6 servings", "1.2 kg sauce"]
 ---
 
-## Ingredients
+# Notes
 
-### Sauce
+A slow-simmered Italian-American meat sauce served over fresh pasta. Best made
+ahead — the flavor deepens overnight. Freezes well for up to three months.
+
+The sauce is a riff on the classic Bolognese ragù: soffritto, browned beef,
+wine reduction, and a long, gentle simmer. The milk near the end is the
+traditional touch — it tenderizes the meat and rounds out the acid.
+
+# Ingredients
+
+## Sauce
 
 - *500 g* ground beef (80/20)
 - *200 g* pancetta, finely diced
@@ -25,13 +34,13 @@ yields: ["6 servings", "1.2 kg sauce"]
 - *0.5 tsp* black pepper
 - *2 tbsp* olive oil
 
-### Pasta and finish
+## Pasta and finish
 
 - *600 g* [Fresh egg pasta](./fresh-egg-pasta.md)
 - *50 g* parmesan, finely grated
 - flat-leaf parsley, for garnish
 
-## Instructions
+# Instructions
 
 Dice the onion, carrots, and celery into a rough mince (soffritto). Heat the
 olive oil in a heavy-bottomed pot over medium heat and add the soffritto with

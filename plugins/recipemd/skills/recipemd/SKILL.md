@@ -20,7 +20,7 @@ Tools for working with [RecipeMD](https://recipemd.org) — a Markdown-based rec
 | **Extract** a recipe from a URL or page content | read `references/extract.md` and follow that workflow |
 | **Plan** weekly meals as a recipe-of-recipes | read `references/meal-plan.md` and follow that workflow |
 | **Shopping list** — consolidate ingredients from a recipe (or meal plan), resolve linked sub-recipes, dedup, group by store section | read `references/shopping-list.md` and follow that workflow |
-| **Export to OKF** (optional) — convert a recipe or recipe collection to an [Open Knowledge Format](https://cloud.google.com/blog/products/data-analytics/how-the-open-knowledge-format-can-improve-data-sharing/) bundle | read `references/okf.md` and follow that workflow |
+| **Export to OKF** (optional) — convert a recipe or recipe collection to an [Open Knowledge Format](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md) bundle | read `references/okf.md` and follow that workflow |
 
 Pick the row that matches the user's request. For parse/scale, run the script directly. For extract/meal-plan/okf, read the corresponding reference file first — it contains the step-by-step workflow.
 
@@ -56,7 +56,7 @@ uv run scripts/okf.py <file>                                   # single recipe -
 uv run scripts/okf.py --bundle <recipes_dir> --out <out_dir>    # collection -> OKF bundle
 ```
 
-One-way, export-only conversion to the [Open Knowledge Format](https://cloud.google.com/blog/products/data-analytics/how-the-open-knowledge-format-can-improve-data-sharing/). RecipeMD remains the source of truth — only use this when the user explicitly asks to share or expose recipes in OKF. See `references/okf.md` for the field mapping and workflow.
+One-way, export-only conversion to the [Open Knowledge Format](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md). RecipeMD remains the source of truth — only use this when the user explicitly asks to share or expose recipes in OKF. See `references/okf.md` for the field mapping and workflow.
 
 ## Conventions
 

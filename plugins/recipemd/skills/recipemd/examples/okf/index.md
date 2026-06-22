@@ -1,9 +1,7 @@
----
-type: "Recipe Collection"
-title: "Example Recipes"
-description: "A small worked example showing the RecipeMD-to-OKF conversion."
----
+# Example Recipes
 
-## Recipes
+A small worked example showing the RecipeMD-to-OKF conversion.
 
-- [Spaghetti Bolognese](./recipes/recipe.md)
+# Recipes
+
+* [Spaghetti Bolognese](./recipes/recipe.md) - A slow-simmered Italian-American meat sauce served over fresh pasta.

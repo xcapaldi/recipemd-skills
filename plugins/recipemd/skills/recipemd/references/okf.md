@@ -1,6 +1,6 @@
 # Export to Open Knowledge Format (OKF)
 
-Optionally convert a RecipeMD recipe — or a whole collection — into an [Open Knowledge Format](https://cloud.google.com/blog/products/data-analytics/how-the-open-knowledge-format-can-improve-data-sharing/) (OKF) bundle: plain markdown files with a YAML frontmatter block, linked together with normal markdown links. This makes recipe knowledge consumable by other AI agents/tools that speak OKF, without giving up RecipeMD as the canonical authoring format.
+Optionally convert a RecipeMD recipe — or a whole collection — into an [Open Knowledge Format](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md) (OKF) bundle: markdown files with a YAML frontmatter block, linked together with normal markdown links. This makes recipe knowledge consumable by other AI agents/tools that speak OKF, without giving up RecipeMD as the canonical authoring format.
 
 This is an **export-only, optional** capability. RecipeMD stays the source of truth; OKF is a derived view generated on request.
 
@@ -37,18 +37,19 @@ uv run scripts/okf.py --bundle <recipes_dir> --out <out_dir> \
 
 | RecipeMD | OKF |
 |---|---|
+| — | `type: Recipe` (frontmatter, always set — the one field OKF requires) |
 | Title | `title` (frontmatter) |
-| Description | `description` (frontmatter) |
+| Description, first sentence | `description` (frontmatter) — OKF's `description` is meant to be one summary sentence |
+| Description, full text (if longer than one sentence) | `# Notes` section in the body |
 | Tags | `tags` (frontmatter) |
-| Yields | `yields` (frontmatter, custom field — not part of the OKF spec but allowed since only `type` is mandatory) |
+| Yields | `yields` (frontmatter, custom field — not part of the core spec but allowed since producers may add extra fields) |
 | Source URL (if known) | `resource` (frontmatter) |
-| — | `type: Recipe` (frontmatter, always set) |
-| Ingredients / ingredient groups | `## Ingredients` section in the body, with nested groups as `###`, `####`, … |
-| Instructions | `## Instructions` section in the body |
+| Ingredients / ingredient groups | `# Ingredients` section in the body, with nested groups as `##`, `###`, … |
+| Instructions | `# Instructions` section in the body |
 
 Linked sub-recipe ingredients (`[Fresh egg pasta](./fresh-egg-pasta.md)`) keep their relative link target unchanged. In bundle mode, every recipe is written under `<out_dir>/recipes/` using its **original filename**, so links between recipes that were already valid in the source collection stay valid in the bundle without rewriting.
 
-A collection's `index.md` gets `type: Recipe Collection` and a bullet list linking to each converted recipe under `## Recipes`.
+A collection's `index.md` follows the spec's reserved-filename rule for directory listings: **no frontmatter**, just a `# <title>` heading, an optional description paragraph, and a `# Recipes` section with one bullet per recipe — `* [Title](./recipes/file.md) - <short description>` — matching the spec's example index format exactly.
 
 ## Step 3: Validate
 
